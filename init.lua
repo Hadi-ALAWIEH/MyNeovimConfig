@@ -377,6 +377,10 @@ require('lazy').setup({
     },
   },
 
+  -- Plugin for enhanced definitions and references
+  {
+    'Hoffs/omnisharp-extended-lsp.nvim',
+  },
   -- Plugin for practicing vim by Prime
   {
     'ThePrimeagen/vim-be-good',
@@ -634,6 +638,18 @@ require('lazy').setup({
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+          -- If you are using the omnisharp extended plugin, it will override the
+          -- default LSP mappings with its own, which are more useful for C# development.
+          -- This also fixes the problem of not being able to view meta-data as source
+          if client.name == 'omnisharp' then
+            local omnisharp_ext = require 'omnisharp_extended'
+            map('grd', omnisharp_ext.lsp_definition, '[G]oto [D]efinition')
+            map('grr', omnisharp_ext.lsp_references, '[G]oto [R]eferences')
+            map('gri', omnisharp_ext.lsp_implementation, '[G]oto [I]mplementation')
+            map('<leader>D', omnisharp_ext.lsp_type_definition, 'Type [D]efinition')
+          end
+
           if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
             local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -714,6 +730,18 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
+
+        omnisharp = {
+          cmd = {
+            'dotnet',
+            vim.fn.stdpath 'data' .. '/mason/packages/omnisharp/libexec/OmniSharp.dll',
+          },
+          enable_import_completion = true,
+          organize_imports_on_format = true,
+          enable_roslyn_analyzers = true,
+          root_dir = require('lspconfig.util').root_pattern('*.sln', '*.csproj', '.git'),
+        },
+
         clangd = {},
         -- gopls = {},
         pyright = {},

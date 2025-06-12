@@ -1,5 +1,17 @@
 # kickstart.nvim
 
+
+
+## Notes my own additions and quirks on my version of kickstart.nvim
+
+* Please remember to actually install all the standalone LSP and DAP's other then adding the plugins to the init.lua file. The Plugins are only there to configure the client side of things
+
+* The java LSP needs it's own standalone plugin, it cannot be just directly added to the list of servers = {}
+
+* Please note that for some LSPs like intelliphense, phpactor, omnisharp and pyright, the LSP needs to know the root of the project so that all the features of the LSP work as expected.
+For now, all the LSPS are working fine, except for the fact that for omnisharp, I still need to figure out a way to deal with the fact that jumping to source of some functions does not work as expected takes me to metadata as source files which appear to have many lines but are actually empty files which causes errors but I can still jump to them.
+
+
 ## Introduction
 
 A starting point for Neovim that is:
