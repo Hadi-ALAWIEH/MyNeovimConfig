@@ -11,6 +11,14 @@
 * Please note that for some LSPs like intelliphense, phpactor, omnisharp and pyright, the LSP needs to know the root of the project so that all the features of the LSP work as expected.
 For now, all the LSPS are working fine, except for the fact that for omnisharp, I still need to figure out a way to deal with the fact that jumping to source of some functions does not work as expected takes me to metadata as source files which appear to have many lines but are actually empty files which causes errors but I can still jump to them.
 
+* Please also note that for some projects, like dotnet, you need to have a solution and a csproj file and
+you even need to build the project for the LSP to work
+
+
+* The Omnisharp is still unable to locate the project root, so when you can read this from the two links:
+https://www.reddit.com/r/neovim/comments/1bzonis/omnisharp_lsp_not_getting_project_root/
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#omnisharp
+
 
 ## Introduction
 
