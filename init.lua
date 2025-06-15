@@ -256,6 +256,14 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end
 
+-- Disable automatic comment continuation on new lines
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = '*',
+  callback = function()
+    vim.opt_local.formatoptions:remove { 'c', 'r', 'o' }
+  end,
+})
+
 ---@type vim.Option
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
@@ -384,6 +392,21 @@ require('lazy').setup({
   -- Plugin for practicing vim by Prime
   {
     'ThePrimeagen/vim-be-good',
+  },
+
+  -- Plugin for ChatGPT integration within Neovim
+  {
+    'jackMort/ChatGPT.nvim',
+    event = 'VeryLazy',
+    config = function()
+      require('chatgpt').setup()
+    end,
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+      'nvim-lua/plenary.nvim',
+      'folke/trouble.nvim', -- optional
+      'nvim-telescope/telescope.nvim',
+    },
   },
 
   -- Plugin for Github copilot support within neovim
@@ -971,7 +994,7 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      -- vim.cmd.colorscheme 'tokyonight'
+      vim.cmd.colorscheme 'retrobox'
     end,
   },
 
