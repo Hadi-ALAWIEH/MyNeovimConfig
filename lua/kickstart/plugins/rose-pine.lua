@@ -6,7 +6,7 @@ return {
   config = function()
     require('rose-pine').setup {
       variant = 'auto',
-      dark_variant = 'moon', -- either dawn, moon or main
+      dark_variant = 'main', -- either dawn, moon or main
       dim_inactive_windows = false,
       extend_background_behind_borders = true,
 
@@ -58,7 +58,8 @@ return {
       },
 
       highlight_groups = {
-        -- Comment = { fg = "foam" },
+        -- Comment = { fg = 'foam' },
+        Visual = { bg = '#ffb300', fg = 'None' },
       },
 
       before_highlight = function(group, highlight, palette)

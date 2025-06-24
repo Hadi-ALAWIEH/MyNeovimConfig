@@ -409,6 +409,9 @@ require('lazy').setup({
     },
   },
 
+  -- Plugin to make neovim a good db client
+  { 'tpope/vim-dadbod', 'kristijanhusak/vim-dadbod-completion', 'kristijanhusak/vim-dadbod-ui' },
+
   -- Plugin for Github copilot support within neovim
   {
     'github/copilot.vim',
@@ -445,7 +448,11 @@ require('lazy').setup({
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
-      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+      {
+        'nvim-tree/nvim-web-devicons',
+        -- enabled = vim.g.have_nerd_font
+        enabled = true,
+      },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -1086,6 +1093,7 @@ require('lazy').setup({
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.harpoon', -- adds harpoon recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
