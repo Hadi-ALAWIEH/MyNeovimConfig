@@ -1085,6 +1085,8 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
+  require 'kickstart.plugins.copilot',
+  require 'kickstart.plugins.avante',
   require 'kickstart.plugins.rose-pine',
   require 'kickstart.plugins.surround',
   require 'kickstart.plugins.debug',
