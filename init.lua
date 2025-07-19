@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -172,8 +172,25 @@ vim.o.confirm = true
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
+-- lua function to check if copilot is on or off and returns the correct command to execute for toggle
+local function is_copilot_enabled()
+  if vim.g.copilot_enabled == true then
+    return 'Copilot disable'
+  else
+    return 'Copilot enable'
+  end
+end
+
+-- remap for toggling copilot on and off
+vim.keymap.set('n', '<leader>co', function()
+  vim.cmd(is_copilot_enabled())
+end, { noremap = true, silent = true, desc = 'Toggle [C]opilot' })
+
 -- remap for the explorer similar to the one of the Primegean
 vim.keymap.set('n', '<leader>pv', '<cmd>Ex<CR>')
+
+-- remap leader<ca> to trigger code actions with the lsp
+vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code Action' })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
