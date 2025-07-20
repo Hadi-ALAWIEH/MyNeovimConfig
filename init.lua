@@ -1022,7 +1022,7 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'retrobox'
+      -- vim.cmd.colorscheme 'retrobox'
     end,
   },
 
@@ -1102,6 +1102,7 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
+  require 'kickstart.plugins.laravel',
   require 'kickstart.plugins.copilot',
   require 'kickstart.plugins.avante',
   require 'kickstart.plugins.rose-pine',
