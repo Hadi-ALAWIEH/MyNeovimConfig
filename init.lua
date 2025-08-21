@@ -84,6 +84,9 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
+-- trying to let Neovim control the cursor shape
+-- vim.o.guicursor = 'n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor'
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -137,7 +140,7 @@ vim.o.updatetime = 250
 -- Decrease mapped sequence wait time
 vim.o.timeoutlen = 300
 
--- Make the cursor fat in all modes
+-- -- Make the cursor fat in all modes
 vim.opt.guicursor = 'n-v-c-sm-i-ci-ve-r-cr-o:block'
 
 -- Configure how new splits should be opened
@@ -186,6 +189,13 @@ vim.keymap.set('n', '<leader>co', function()
   vim.cmd(is_copilot_enabled())
 end, { noremap = true, silent = true, desc = 'Toggle [C]opilot' })
 
+-- remap to be able to move blocks of code up and down while in visual mode
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+
+-- remap for formatting code
+vim.keymap.set('n', '<leader> f', vim.lsp.buf.format, { desc = '[F]ormat code' })
+
 -- remap for the explorer similar to the one of the Primegean
 vim.keymap.set('n', '<leader>pv', '<cmd>Ex<CR>')
 
@@ -218,6 +228,17 @@ vim.keymap.set('n', '<leader>d', '<C-d>', { desc = 'Scroll down half page' })
 
 -- Scroll up half a page with <leader>y (or use <leader>u if you prefer)
 vim.keymap.set('n', '<leader>u', '<C-u>', { desc = 'Scroll up half page' })
+
+-- Center the screen when scrolling
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
+
+-- This is so that when I put lines at the same level the cursor stays at the beginning of the line
+vim.keymap.set('n', 'J', 'mzJ`z')
+
+-- This is to keep search results centered when paging through the found results
+vim.keymap.set('n', 'n', 'nzzzv')
+vim.keymap.set('n', 'N', 'Nzzzv')
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -412,19 +433,20 @@ require('lazy').setup({
   },
 
   -- Plugin for ChatGPT integration within Neovim
-  {
-    'jackMort/ChatGPT.nvim',
-    event = 'VeryLazy',
-    config = function()
-      require('chatgpt').setup()
-    end,
-    dependencies = {
-      'MunifTanjim/nui.nvim',
-      'nvim-lua/plenary.nvim',
-      'folke/trouble.nvim', -- optional
-      'nvim-telescope/telescope.nvim',
-    },
-  },
+  -- I am going to disable it for now because I do not have the money for an api key ... ( I am broke )
+  -- {
+  --   'jackMort/ChatGPT.nvim',
+  --   event = 'VeryLazy',
+  --   config = function()
+  --     require('chatgpt').setup()
+  --   end,
+  --   dependencies = {
+  --     'MunifTanjim/nui.nvim',
+  --     'nvim-lua/plenary.nvim',
+  --     'folke/trouble.nvim', -- optional
+  --     'nvim-telescope/telescope.nvim',
+  --   },
+  -- },
 
   -- Plugin to make neovim a good db client
   { 'tpope/vim-dadbod', 'kristijanhusak/vim-dadbod-completion', 'kristijanhusak/vim-dadbod-ui' },
@@ -1102,6 +1124,8 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
+
+  -- require 'kickstart.plugins.oil',
   require 'kickstart.plugins.laravel',
   require 'kickstart.plugins.copilot',
   require 'kickstart.plugins.avante',
