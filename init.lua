@@ -1,3 +1,4 @@
+-- Those lines represent the help comments that come with the kickstart, I am going to keep them for later reference but will fold them in the buffer so that I can read the config more easily
 --[[
 
 =====================================================================
@@ -84,8 +85,11 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
--- trying to let Neovim control the cursor shape
--- vim.o.guicursor = 'n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor'
+-- letting neovim control the cursor shape
+vim.o.guicursor = 'n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor'
+
+-- -- Make the cursor fat in all modes
+-- vim.opt.guicursor = 'n-v-c-sm-i-ci-ve-r-cr-o:block'
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -139,9 +143,6 @@ vim.o.updatetime = 250
 
 -- Decrease mapped sequence wait time
 vim.o.timeoutlen = 300
-
--- -- Make the cursor fat in all modes
-vim.opt.guicursor = 'n-v-c-sm-i-ci-ve-r-cr-o:block'
 
 -- Configure how new splits should be opened
 vim.o.splitright = true
@@ -258,10 +259,10 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+-- vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+-- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+-- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+-- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
 -- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
@@ -535,6 +536,9 @@ require('lazy').setup({
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
+
+      -- keymap to be able to open neotree using the leader key
+      vim.keymap.set('n', '<leader>fe', '<CMD>Neotree toggle<CR>', { desc = '[F]ile [E]xplorer' })
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
