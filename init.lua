@@ -86,10 +86,10 @@ P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
 -- letting neovim control the cursor shape
-vim.o.guicursor = 'n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor'
-
+-- vim.o.guicursor = 'n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor'
+--
 -- -- Make the cursor fat in all modes
--- vim.opt.guicursor = 'n-v-c-sm-i-ci-ve-r-cr-o:block'
+vim.opt.guicursor = 'n-v-c-sm-i-ci-ve-r-cr-o:block'
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -190,6 +190,8 @@ vim.keymap.set('n', '<leader>co', function()
   vim.cmd(is_copilot_enabled())
 end, { noremap = true, silent = true, desc = 'Toggle [C]opilot' })
 
+-- remap to be able to open toggle undo tree
+vim.keymap.set('n', '<leader>nd', '<CMD>UndotreeToggle<CR>', { desc = 'Toggle [N]eotree [D]iff' })
 -- remap to be able to move blocks of code up and down while in visual mode
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
@@ -451,6 +453,8 @@ require('lazy').setup({
 
   -- Plugin to make neovim a good db client
   { 'tpope/vim-dadbod', 'kristijanhusak/vim-dadbod-completion', 'kristijanhusak/vim-dadbod-ui' },
+
+  { 'tpope/vim-fugitive' },
 
   -- Plugin for Github copilot support within neovim
   {
@@ -1130,6 +1134,8 @@ require('lazy').setup({
   --
 
   -- require 'kickstart.plugins.oil',
+  require 'kickstart.plugins.undo-tree',
+  require 'kickstart.plugins.smear',
   require 'kickstart.plugins.laravel',
   require 'kickstart.plugins.copilot',
   require 'kickstart.plugins.avante',
