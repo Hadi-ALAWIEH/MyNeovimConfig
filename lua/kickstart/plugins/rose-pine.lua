@@ -6,7 +6,8 @@ return {
   config = function()
     require('rose-pine').setup {
       variant = 'auto',
-      dark_variant = 'moon', -- either dawn, moon or main
+      -- dark_variant = 'moon', -- either dawn, moon or main
+      dark_variant = 'main', -- either dawn, moon or main
       dim_inactive_windows = true,
       extend_background_behind_borders = true,
 
@@ -19,7 +20,7 @@ return {
       styles = {
         bold = false,
         italic = false,
-        transparency = true,
+        transparency = false,
       },
 
       groups = {

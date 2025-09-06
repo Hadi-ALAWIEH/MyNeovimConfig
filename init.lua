@@ -89,7 +89,7 @@ P.S. You can delete this when you're done too. It's your config now! :)
 -- vim.o.guicursor = 'n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor'
 --
 -- -- Make the cursor fat in all modes
-vim.opt.guicursor = 'n-v-c-sm-i-ci-ve-r-cr-o:block'
+vim.opt.guicursor = 'n-v-c-sm-i-ci-ve-r-cr-o:block,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor'
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -185,6 +185,15 @@ local function is_copilot_enabled()
   end
 end
 
+-- remap so that I can get code actions when in visual mode
+vim.keymap.set('v', '<leader>ca', '<CMD>lua vim.lsp.buf.code_action()<CR>', { desc = '[C]ode [A]ction' })
+
+-- remap to be able to select around the {} of a method and then create a fold
+vim.keymap.set('n', '<leader>zf', 'va{zf', { desc = 'Create [Z]ip [F]old' })
+
+-- remap for toggling indentation lines
+vim.keymap.set('n', '<leader>ibl', '<CMD>IBLToggle<CR>', { desc = 'Toggle [I]ndent [B]lank [L]ines' })
+
 -- remap for toggling copilot on and off
 vim.keymap.set('n', '<leader>co', function()
   vim.cmd(is_copilot_enabled())
@@ -229,8 +238,13 @@ vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p', { desc = 'Paste from system cli
 -- Scroll down half a page with <leader>d
 vim.keymap.set('n', '<leader>d', '<C-d>', { desc = 'Scroll down half page' })
 
--- Scroll up half a page with <leader>y (or use <leader>u if you prefer)
+-- Scroll up half a page with <leader>u (or use <leader>u if you prefer)
 vim.keymap.set('n', '<leader>u', '<C-u>', { desc = 'Scroll up half page' })
+
+-- remap so that I can use <leader>d and <leader>u in visual mode to be able to scroll down half a page whilst selecting text
+vim.keymap.set('v', '<leader>d', '<C-d>', { desc = 'Scroll down half page' })
+
+vim.keymap.set('v', '<leader>u', '<C-u>', { desc = 'Scroll up half page' })
 
 -- Center the screen when scrolling
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
@@ -373,58 +387,58 @@ require('lazy').setup({
   -- Then, because we use the `opts` key (recommended), the configuration runs
   -- after the plugin has been loaded as `require(MODULE).setup(opts)`.
 
-  { -- Useful plugin to show you pending keybinds.
-    'folke/which-key.nvim',
-    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
-    opts = {
-      -- delay between pressing a key and opening which-key (milliseconds)
-      -- this setting is independent of vim.o.timeoutlen
-      delay = 0,
-      icons = {
-        -- set icon mappings to true if you have a Nerd Font
-        mappings = vim.g.have_nerd_font,
-        -- If you are using a Nerd Font: set icons.keys to an empty table which will use the
-        -- default which-key.nvim defined Nerd Font icons, otherwise define a string table
-        keys = vim.g.have_nerd_font and {} or {
-          Up = '<Up> ',
-          Down = '<Down> ',
-          Left = '<Left> ',
-          Right = '<Right> ',
-          C = '<C-…> ',
-          M = '<M-…> ',
-          D = '<D-…> ',
-          S = '<S-…> ',
-          CR = '<CR> ',
-          Esc = '<Esc> ',
-          ScrollWheelDown = '<ScrollWheelDown> ',
-          ScrollWheelUp = '<ScrollWheelUp> ',
-          NL = '<NL> ',
-          BS = '<BS> ',
-          Space = '<Space> ',
-          Tab = '<Tab> ',
-          F1 = '<F1>',
-          F2 = '<F2>',
-          F3 = '<F3>',
-          F4 = '<F4>',
-          F5 = '<F5>',
-          F6 = '<F6>',
-          F7 = '<F7>',
-          F8 = '<F8>',
-          F9 = '<F9>',
-          F10 = '<F10>',
-          F11 = '<F11>',
-          F12 = '<F12>',
-        },
-      },
-
-      -- Document existing key chains
-      spec = {
-        { '<leader>s', group = '[S]earch' },
-        { '<leader>t', group = '[T]oggle' },
-        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
-      },
-    },
-  },
+  -- { -- Useful plugin to show you pending keybinds.
+  --   'folke/which-key.nvim',
+  --   event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+  --   opts = {
+  --     -- delay between pressing a key and opening which-key (milliseconds)
+  --     -- this setting is independent of vim.o.timeoutlen
+  --     delay = 0,
+  --     icons = {
+  --       -- set icon mappings to true if you have a Nerd Font
+  --       mappings = vim.g.have_nerd_font,
+  --       -- If you are using a Nerd Font: set icons.keys to an empty table which will use the
+  --       -- default which-key.nvim defined Nerd Font icons, otherwise define a string table
+  --       keys = vim.g.have_nerd_font and {} or {
+  --         Up = '<Up> ',
+  --         Down = '<Down> ',
+  --         Left = '<Left> ',
+  --         Right = '<Right> ',
+  --         C = '<C-…> ',
+  --         M = '<M-…> ',
+  --         D = '<D-…> ',
+  --         S = '<S-…> ',
+  --         CR = '<CR> ',
+  --         Esc = '<Esc> ',
+  --         ScrollWheelDown = '<ScrollWheelDown> ',
+  --         ScrollWheelUp = '<ScrollWheelUp> ',
+  --         NL = '<NL> ',
+  --         BS = '<BS> ',
+  --         Space = '<Space> ',
+  --         Tab = '<Tab> ',
+  --         F1 = '<F1>',
+  --         F2 = '<F2>',
+  --         F3 = '<F3>',
+  --         F4 = '<F4>',
+  --         F5 = '<F5>',
+  --         F6 = '<F6>',
+  --         F7 = '<F7>',
+  --         F8 = '<F8>',
+  --         F9 = '<F9>',
+  --         F10 = '<F10>',
+  --         F11 = '<F11>',
+  --         F12 = '<F12>',
+  --       },
+  --     },
+  --
+  --     -- Document existing key chains
+  --     spec = {
+  --       { '<leader>s', group = '[S]earch' },
+  --       { '<leader>t', group = '[T]oggle' },
+  --       { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+  --     },
+  --   },
+  -- },
 
   -- Plugin for enhanced definitions and references
   {
@@ -1133,9 +1147,11 @@ require('lazy').setup({
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
 
+  require 'kickstart.plugins.goto-preview',
+  require 'kickstart.plugins.marks',
   -- require 'kickstart.plugins.oil',
   require 'kickstart.plugins.undo-tree',
-  require 'kickstart.plugins.smear',
+  -- require 'kickstart.plugins.smear',
   require 'kickstart.plugins.laravel',
   require 'kickstart.plugins.copilot',
   require 'kickstart.plugins.avante',
@@ -1144,7 +1160,7 @@ require('lazy').setup({
   require 'kickstart.plugins.debug',
   require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
-  require 'kickstart.plugins.autopairs',
+  -- require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
   require 'kickstart.plugins.harpoon', -- adds harpoon recommend keymaps
