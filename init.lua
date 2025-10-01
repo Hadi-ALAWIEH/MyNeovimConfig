@@ -834,7 +834,7 @@ require('lazy').setup({
         },
 
         clangd = {},
-        -- gopls = {},
+        gopls = {},
         pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -1154,7 +1154,8 @@ require('lazy').setup({
   -- require 'kickstart.plugins.smear',
   require 'kickstart.plugins.laravel',
   require 'kickstart.plugins.copilot',
-  require 'kickstart.plugins.avante',
+  require 'kickstart.plugins.sidekick',
+  -- require 'kickstart.plugins.avante',
   require 'kickstart.plugins.rose-pine',
   require 'kickstart.plugins.surround',
   require 'kickstart.plugins.debug',
