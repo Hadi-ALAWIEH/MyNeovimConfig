@@ -97,6 +97,9 @@ vim.opt.guicursor = 'n-v-c-sm-i-ci-ve-r-cr-o:block,a:blinkwait700-blinkoff400-bl
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- This is so that I can copilot autocompletion within markdown files too
+vim.g.copilot_filetypes = { markdown = true }
+
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
@@ -1147,6 +1150,8 @@ require('lazy').setup({
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
 
+  -- require 'kickstart.plugins.rest', // to work on later
+  require 'kickstart.plugins.lualine',
   require 'kickstart.plugins.goto-preview',
   require 'kickstart.plugins.marks',
   -- require 'kickstart.plugins.oil',
