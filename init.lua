@@ -188,6 +188,9 @@ local function is_copilot_enabled()
   end
 end
 
+-- remap so that I can easily go-to-preview of an object
+vim.keymap.set('n', '<leader>gp', '<CMD>lua require("goto-preview").goto_preview_definition()<CR>', { noremap = true, desc = '[G]o [P]review' })
+
 -- remap so that I can get code actions when in visual mode
 vim.keymap.set('v', '<leader>ca', '<CMD>lua vim.lsp.buf.code_action()<CR>', { desc = '[C]ode [A]ction' })
 
@@ -865,6 +868,14 @@ require('lazy').setup({
         },
         intelephense = {},
         phpactor = {},
+
+        html = {
+          filetypes = { 'html', 'blade', 'php' },
+        },
+
+        emmet_language_server = {
+          filetypes = { 'html', 'css', 'blade', 'php', 'javascriptreact', 'typescriptreact' },
+        },
       }
 
       -- Ensure the servers and tools above are installed
@@ -1151,6 +1162,7 @@ require('lazy').setup({
   --
 
   -- require 'kickstart.plugins.rest', // to work on later
+  require 'kickstart.plugins.markdown-preview',
   require 'kickstart.plugins.lualine',
   require 'kickstart.plugins.goto-preview',
   require 'kickstart.plugins.marks',
