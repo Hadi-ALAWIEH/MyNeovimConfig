@@ -1162,6 +1162,7 @@ require('lazy').setup({
   --
 
   -- require 'kickstart.plugins.rest', // to work on later
+  -- require 'kickstart.plugins.roselyn',
   require 'kickstart.plugins.markdown-preview',
   require 'kickstart.plugins.lualine',
   require 'kickstart.plugins.goto-preview',
