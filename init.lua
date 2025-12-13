@@ -194,6 +194,11 @@ vim.keymap.set('n', '<leader>gp', '<CMD>lua require("goto-preview").goto_preview
 -- remap so that I can get code actions when in visual mode
 vim.keymap.set('v', '<leader>ca', '<CMD>lua vim.lsp.buf.code_action()<CR>', { desc = '[C]ode [A]ction' })
 
+-- remap to use avante ai
+vim.keymap.set('n', '<leader>av', '<CMD>AvanteEdit<CR>', { desc = '[A]vante [E]dit' })
+
+vim.keymap.set('v', '<leader>av', '<CMD>AvanteEdit<CR>', { desc = '[A]vante [E]dit' })
+
 -- remap to be able to select around the {} of a method and then create a fold
 vim.keymap.set('n', '<leader>zf', 'va{zf', { desc = 'Create [Z]ip [F]old' })
 
@@ -1173,7 +1178,7 @@ require('lazy').setup({
   require 'kickstart.plugins.laravel',
   require 'kickstart.plugins.copilot',
   require 'kickstart.plugins.sidekick',
-  -- require 'kickstart.plugins.avante',
+  require 'kickstart.plugins.avante',
   require 'kickstart.plugins.rose-pine',
   require 'kickstart.plugins.surround',
   require 'kickstart.plugins.debug',
