@@ -20,7 +20,8 @@ return {
       styles = {
         bold = false,
         italic = false,
-        transparency = false,
+        -- transparency = false,
+        transparency = true,
       },
 
       groups = {

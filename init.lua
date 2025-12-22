@@ -91,6 +91,9 @@ P.S. You can delete this when you're done too. It's your config now! :)
 -- -- Make the cursor fat in all modes
 vim.opt.guicursor = 'n-v-c-sm-i-ci-ve-r-cr-o:block,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor'
 
+-- Enable 24-bit RGB color in the TUI
+vim.opt.termguicolors = true
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -194,10 +197,13 @@ vim.keymap.set('n', '<leader>gp', '<CMD>lua require("goto-preview").goto_preview
 -- remap so that I can get code actions when in visual mode
 vim.keymap.set('v', '<leader>ca', '<CMD>lua vim.lsp.buf.code_action()<CR>', { desc = '[C]ode [A]ction' })
 
--- remap to use avante ai
+-- remap to use avante ai edit
 vim.keymap.set('n', '<leader>av', '<CMD>AvanteEdit<CR>', { desc = '[A]vante [E]dit' })
-
 vim.keymap.set('v', '<leader>av', '<CMD>AvanteEdit<CR>', { desc = '[A]vante [E]dit' })
+
+-- remap to use avante ai ask
+vim.keymap.set('n', '<leader>aa', '<CMD>AvanteAsk<CR>', { desc = '[A]vante [A]sk' })
+vim.keymap.set('v', '<leader>aa', '<CMD>AvanteAsk<CR>', { desc = '[A]vante [A]sk' })
 
 -- remap to be able to select around the {} of a method and then create a fold
 vim.keymap.set('n', '<leader>zf', 'va{zf', { desc = 'Create [Z]ip [F]old' })
@@ -1168,6 +1174,7 @@ require('lazy').setup({
 
   -- require 'kickstart.plugins.rest', // to work on later
   -- require 'kickstart.plugins.roselyn',
+  require 'kickstart.plugins.elixir-tools',
   require 'kickstart.plugins.markdown-preview',
   require 'kickstart.plugins.lualine',
   require 'kickstart.plugins.goto-preview',
